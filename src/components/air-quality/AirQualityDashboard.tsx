@@ -247,7 +247,7 @@ export default function AirQualityDashboard() {
       <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-800">
         <CardHeader>
           <CardTitle className="text-lg text-blue-900 dark:text-blue-100">
-            Weather Conditions
+            Weather
           </CardTitle>
         </CardHeader>
         <CardContent>

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 export const HealthIcon = ({ className = "w-10 h-10 text-primary" }) => (
