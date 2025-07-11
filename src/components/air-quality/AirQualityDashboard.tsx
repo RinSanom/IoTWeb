@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useGetWeatherQuery } from "@/lib/services/weatherApi";
 import {
   Activity,
   Wind,
@@ -24,6 +25,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
+// Static air quality data (weather will be fetched from API)
 const airQualityData = {
   aqi: 85,
   status: "Moderate",
@@ -49,18 +51,15 @@ const airQualityData = {
     so2: { value: 15, unit: "μg/m³", status: "Good", color: "text-green-600" },
     co: { value: 1.2, unit: "mg/m³", status: "Good", color: "text-green-600" },
   },
-  weather: {
-    temperature: 28,
-    humidity: 65,
-    windSpeed: 8,
-    windDirection: "NE",
-    visibility: 10,
-    pressure: 1013,
-    uvIndex: 6,
-  },
   healthRecommendation:
     "Moderate air quality. Sensitive individuals should limit prolonged outdoor exertion.",
   dominantPollutant: "PM2.5",
+};
+
+// Phnom Penh coordinates for weather API
+const PHNOM_PENH_COORDS = {
+  latitude: 11.5564,
+  longitude: 104.9282,
 };
 
 const getAQIBgColor = (aqi: number) => {
@@ -87,6 +86,13 @@ export default function AirQualityDashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isRealTime] = useState(true);
 
+  // Fetch live weather data
+  const {
+    data: weatherData,
+    error: weatherError,
+    isLoading: weatherLoading,
+  } = useGetWeatherQuery(PHNOM_PENH_COORDS);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -96,6 +102,31 @@ export default function AirQualityDashboard() {
   }, []);
 
   const aqiBgColor = getAQIBgColor(airQualityData.aqi);
+
+  // Helper function to get wind direction from degrees
+  const getWindDirection = (degrees: number) => {
+    const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+    return directions[Math.round(degrees / 22.5) % 16];
+  };
+
+  // Get current weather data from API response
+  const getCurrentWeather = () => {
+    if (!weatherData || !weatherData.hourly) return null;
+    
+    const now = new Date();
+    const currentHourIndex = now.getHours();
+    
+    return {
+      temperature: Math.round(weatherData.hourly.temperature_2m[currentHourIndex] || 0),
+      humidity: Math.round(weatherData.hourly.relative_humidity_2m[currentHourIndex] || 0),
+      windSpeed: Math.round(weatherData.hourly.wind_speed_10m[currentHourIndex] || 0),
+      windDirection: getWindDirection(weatherData.hourly.wind_direction_10m[currentHourIndex] || 0),
+      pressure: Math.round(weatherData.hourly.surface_pressure[currentHourIndex] || 0),
+      visibility: Math.round((weatherData.hourly.visibility[currentHourIndex] || 0) / 1000), // Convert meters to km
+    };
+  };
+
+  const currentWeather = getCurrentWeather();
 
   return (
     <div className="space-y-4 sm:space-y-6 p-3 sm:p-4 lg:p-6">
@@ -243,52 +274,95 @@ export default function AirQualityDashboard() {
         ))}
       </div>
 
-      {/* Weather Info */}
+      {/* Weather Info - Live Data */}
       <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-800">
         <CardHeader>
-          <CardTitle className="text-lg text-blue-900 dark:text-blue-100">
+          <CardTitle className="text-lg text-blue-900 dark:text-blue-100 flex items-center gap-2">
             Weather
+            {weatherLoading && (
+              <div className="w-4 h-4 border-2 border-blue-300 border-t-blue-600 rounded-full animate-spin"></div>
+            )}
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              {
-                icon: Thermometer,
-                label: "Temperature",
-                value: `${airQualityData.weather.temperature}°C`,
-              },
-              {
-                icon: Droplets,
-                label: "Humidity",
-                value: `${airQualityData.weather.humidity}%`,
-              },
-              {
-                icon: Wind,
-                label: "Wind",
-                value: `${airQualityData.weather.windSpeed} km/h ${airQualityData.weather.windDirection}`,
-              },
-              {
-                icon: Eye,
-                label: "Visibility",
-                value: `${airQualityData.weather.visibility} km`,
-              },
-            ].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-3">
+          {weatherError ? (
+            <div className="text-red-600 dark:text-red-400 text-center py-4">
+              <p>Failed to load weather data</p>
+              <p className="text-sm mt-1">Please check your connection and try again</p>
+            </div>
+          ) : weatherLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              {[1, 2, 3, 4].map((idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 animate-pulse">
+                    <div className="h-5 w-5 bg-blue-200 dark:bg-blue-800 rounded"></div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-blue-200 dark:bg-blue-800 rounded animate-pulse w-16"></div>
+                    <div className="h-5 bg-blue-200 dark:bg-blue-800 rounded animate-pulse w-12"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
-                  <item.icon className="h-5 w-5 text-blue-600" />
+                  <Thermometer className="h-5 w-5 text-blue-600" />
                 </div>
                 <div>
                   <p className="text-sm text-blue-700 dark:text-blue-300">
-                    {item.label}
+                    Temperature
                   </p>
                   <p className="text-lg font-semibold text-blue-900 dark:text-blue-100">
-                    {item.value}
+                    {currentWeather ? `${currentWeather.temperature}°C` : 'N/A'}
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
+              
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                  <Droplets className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-blue-700 dark:text-blue-300">
+                    Humidity
+                  </p>
+                  <p className="text-lg font-semibold text-blue-900 dark:text-blue-100">
+                    {currentWeather ? `${currentWeather.humidity}%` : 'N/A'}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                  <Wind className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-blue-700 dark:text-blue-300">
+                    Wind
+                  </p>
+                  <p className="text-lg font-semibold text-blue-900 dark:text-blue-100">
+                    {currentWeather ? `${currentWeather.windSpeed} km/h ${currentWeather.windDirection}` : 'N/A'}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                  <Eye className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-blue-700 dark:text-blue-300">
+                    Visibility
+                  </p>
+                  <p className="text-lg font-semibold text-blue-900 dark:text-blue-100">
+                    {currentWeather ? `${currentWeather.visibility} km` : 'N/A'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 

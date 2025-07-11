@@ -10,7 +10,7 @@ export const weatherApi = createApi({
   endpoints: (builder) => ({
     getWeather: builder.query<WeatherResponse, { latitude: number; longitude: number }>({
       query: ({ latitude, longitude }) =>
-        `forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,wind_speed_10m,wind_direction_10m&timezone=auto`,
+        `forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m,surface_pressure,visibility&timezone=auto`,
     }),
   }),
 });

@@ -175,7 +175,7 @@ export default function Home() {
                 </Button>
               </div>
               <div className="relative mt-8 lg:mt-0" data-aos="fade-left">
-                <div className="relative bg-white dark:bg-gray-700 rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <div className="">
                   <div className="aspect-video rounded-lg sm:rounded-xl overflow-hidden">
                     <Image
                       src="/image/image_1.png"
@@ -193,7 +193,7 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
               {/* Story Section */}
               <div
-                className="bg-white/50 dark:bg-gray-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8"
+                className=""
                 data-aos="fade-up">
                 <div className="space-y-4 sm:space-y-6">
                   <div className="relative">
@@ -211,7 +211,7 @@ export default function Home() {
               </div>
 
               <div
-                className="bg-white/50 dark:bg-gray-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8"
+                className="p-4 sm:p-6 lg:p-8"
                 data-aos="fade-up"
                 data-aos-delay="200"
               >
@@ -254,7 +254,7 @@ export default function Home() {
                 data-aos="fade-left"
                 data-aos-delay="300"
               >
-                <div className="relative bg-white dark:bg-gray-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-xl">
+                <div className="">
                   <div className="aspect-video rounded-lg sm:rounded-xl overflow-hidden">
                     <Image
                       src="/image/image_2.png"
