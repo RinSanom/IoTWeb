@@ -28,7 +28,6 @@ import {
   Search,
   ChevronRight,
   Info,
-  CloudCog,
 } from "lucide-react";
 
 
