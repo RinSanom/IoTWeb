@@ -49,13 +49,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://airpollution-monitor.com",
+    url: "https://io-t-web-btit.vercel.app/",
     siteName: "Air Pollution Monitor",
     title: "Air Pollution Monitor - Track & Protect Your Environment",
     description: "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
     images: [
       {
-        url: "/image/image.png",
+        url: "https://imgs.search.brave.com/XkE856Cspco6DkBVd3GJ1F9qbywtIKkqpgLHTphFO6I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTMx/NTM4MjMzMy9waG90/by9pbmRvb3ItYWly/LXF1YWxpdHktbWVh/c3VyZW1lbnQtY28y/LW1vbml0b3IuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPUVE/eGI2bnFwa3p4Q3d3/aWZ6RGpna0hKQUVj/M1JVNm5USHhtRjhR/WXlJeUk9",
         width: 1200,
         height: 630,
         alt: "Air Pollution Monitoring Dashboard",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Air Pollution Monitor - Track & Protect Your Environment",
     description: "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
-    images: ["/image/image.png"],
+    images: ["https://imgs.search.brave.com/XkE856Cspco6DkBVd3GJ1F9qbywtIKkqpgLHTphFO6I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTMx/NTM4MjMzMy9waG90/by9pbmRvb3ItYWly/LXF1YWxpdHktbWVh/c3VyZW1lbnQtY28y/LW1vbml0b3IuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPUVE/eGI2bnFwa3p4Q3d3/aWZ6RGpna0hKQUVj/M1JVNm5USHhtRjhR/WXlJeUk9"],
     creator: "@airpollutionmonitor",
   },
   viewport: {
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://airpollution-monitor.com"),
+  metadataBase: new URL("https://io-t-web-btit.vercel.app/"),
   alternates: {
     canonical: "/",
   },
