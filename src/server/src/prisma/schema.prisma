@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AQI {
+  id        Int      @id @default(autoincrement())
+  pm2_5     Float? // PM2.5 (µg/m³)
+  pm10      Float? // PM10 (µg/m³)
+  no2       Float? // Nitrogen Dioxide (µg/m³)
+  o3        Float? // Ozone (µg/m³)
+  co        Float? // Carbon Monoxide (mg/m³)
+  so2       Float? // Sulfur Dioxide (µg/m³)
+  nh3       Float? // Ammonia (µg/m³)
+  pb        Float? // Lead (µg/m³)
+  timestamp DateTime @default(now())
+
+  @@map("aqi_data")
+}
