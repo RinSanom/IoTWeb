@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/layout/Header";
 import ReduxProvider from "@/lib/store/ReduxProvider";
+import PWAInstaller from "@/components/PWAInstaller";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import { MobileInstallInstructions } from "@/components/MobileInstallInstructions";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +28,7 @@ export const metadata: Metadata = {
     "air quality",
     "environmental monitoring",
     "weather tracking",
-    "pollution data",
+    "pollution data",    
     "health protection",
     "environmental health",
     "air quality index",
@@ -49,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://io-t-web-btit.vercel.app/",
+    url: "https://daaa4fd7e035.ngrok-free.app/",
     siteName: "Air Pollution Monitor",
     title: "Air Pollution Monitor - Track & Protect Your Environment",
     description: "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
@@ -79,8 +82,32 @@ export const metadata: Metadata = {
     icon: "/icons/logo.png",
     shortcut: "/icons/logo.png",
     apple: "/icons/logo.png",
+    other: [
+      {
+        rel: "apple-touch-icon-precomposed",
+        url: "/icons/logo.png",
+      },
+    ],
   },
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Air Monitor",
+    startupImage: [
+      "/icons/logo.png",
+    ],
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "Air Monitor",
+    "application-name": "Air Pollution Monitor",
+    "msapplication-TileColor": "#2563eb",
+    "msapplication-config": "/browserconfig.xml",
+    "theme-color": "#2563eb",
+  },
   category: "environmental",
   classification: "Environmental Monitoring",
   referrer: "origin-when-cross-origin",
@@ -89,7 +116,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://io-t-web-btit.vercel.app/"),
+  metadataBase: new URL("https://daaa4fd7e035.ngrok-free.app/"),
   alternates: {
     canonical: "/",
   },
@@ -102,11 +129,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="theme-color" content="#2563eb" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Air Monitor" />
+        <link rel="apple-touch-icon" href="/icons/logo.png" />
+        <link rel="icon" href="/icons/logo.png" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <PWAInstallPrompt />
+        <MobileInstallInstructions />
         <Header />
         <ReduxProvider>{children}</ReduxProvider>
+        <PWAInstaller />
       </body>
     </html>
   );

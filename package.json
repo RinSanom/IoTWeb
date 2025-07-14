@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@googlemaps/react-wrapper": "^1.2.0",
+    "@khmyznikov/pwa-install": "^0.5.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@reduxjs/toolkit": "^2.8.2",
     "@types/google.maps": "^3.58.1",
@@ -18,7 +19,9 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.525.0",
     "next": "15.3.5",
+    "next-pwa": "^5.6.0",
     "openmeteo": "^1.2.0",
+    "pwa-install-handler": "^2.6.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",

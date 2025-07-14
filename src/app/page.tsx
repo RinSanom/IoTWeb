@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import ImpactCard from "@/components/ui/impact-card";
+import { InstallPWAButton } from "@/components/ui/install-pwa-button";
 import Image from "next/image";
 import { useEffect } from "react";
 import AOS from "aos";
@@ -60,13 +61,7 @@ export default function Home() {
                   data-aos="fade-up"
                   data-aos-delay="400"
                 >
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-primary text-primary hover:bg-primary hover:text-white dark:border-primary dark:text-primary dark:bg-gray-800/50 dark:hover:bg-primary dark:hover:text-white px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-semibold rounded-xl transition-all duration-300 w-full sm:w-auto"
-                  >
-                    Join With Us
-                  </Button>
+                  <InstallPWAButton />
                 </div>
 
                 <div
