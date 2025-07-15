@@ -8,6 +8,7 @@ import AirQualityMap from "@/components/air-quality/AirQualityMap";
 import AirQualityStats from "@/components/air-quality/AirQualityStats";
 import AirQualityChart from "@/components/air-quality/AirQualityChart";
 import AirQualityHistory from "@/components/air-quality/AirQualityHistory";
+import AirQualityRealTime from "@/components/air-quality/AirQualityRealTime";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -29,8 +30,6 @@ import {
   ChevronRight,
   Info,
 } from "lucide-react";
-
-
 
 export default function AirQualityPage() {
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -273,6 +272,11 @@ export default function AirQualityPage() {
               </Button>
             ))}
           </div>
+        </div>
+
+        {/* Real-time Air Quality Data from MQTT */}
+        <div className="mb-8" data-aos="fade-up" data-aos-delay="250">
+          <AirQualityRealTime />
         </div>
 
         {/* Enhanced Dashboard Grid */}

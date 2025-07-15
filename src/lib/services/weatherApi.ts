@@ -14,5 +14,4 @@ export const weatherApi = createApi({
     }),
   }),
 });
-
 export const { useGetWeatherQuery } = weatherApi;
