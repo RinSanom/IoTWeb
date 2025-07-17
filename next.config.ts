@@ -6,8 +6,6 @@ const withPWA = require('next-pwa')({
   register: true,
   skipWaiting: true,
   sw: 'sw.js',
-  swSrc: undefined, // Use default service worker
-  mode: 'production',
   runtimeCaching: [
     {
       urlPattern: /^https?.*/,
@@ -29,10 +27,7 @@ const withPWA = require('next-pwa')({
     document: '/offline.html',
   },
   publicExcludes: ['!noprecache/**/*'],
-  // Enable service worker on all origins
   scope: '/',
-  reloadOnOnline: true,
-  cacheOnFrontEndNav: true,
 });
 
 const nextConfig: NextConfig = {
