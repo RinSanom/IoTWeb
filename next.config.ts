@@ -6,6 +6,8 @@ const withPWA = require('next-pwa')({
   register: true,
   skipWaiting: true,
   sw: 'sw.js',
+  swSrc: undefined, // Use default service worker
+  mode: 'production',
   runtimeCaching: [
     {
       urlPattern: /^https?.*/,
@@ -16,6 +18,10 @@ const withPWA = require('next-pwa')({
           maxEntries: 200,
           maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
         },
+        networkTimeoutSeconds: 10,
+        cacheableResponse: {
+          statuses: [0, 200],
+        },
       },
     },
   ],
@@ -25,6 +31,8 @@ const withPWA = require('next-pwa')({
   publicExcludes: ['!noprecache/**/*'],
   // Enable service worker on all origins
   scope: '/',
+  reloadOnOnline: true,
+  cacheOnFrontEndNav: true,
 });
 
 const nextConfig: NextConfig = {
@@ -71,7 +79,7 @@ const nextConfig: NextConfig = {
 
   // Image optimization
   images: {
-    domains: ['localhost', '14eab50ee750.ngrok-free.app', 'daaa4fd7e035.ngrok-free.app', 'io-t-web-six.vercel.app'],
+    domains: ['localhost', '14eab50ee750.ngrok-free.app', 'daaa4fd7e035.ngrok-free.app', 'io-t-web-six.vercel.app', 'io-t-web-btit.vercel.app'],
     formats: ['image/webp', 'image/avif'],
   },
   

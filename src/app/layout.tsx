@@ -12,6 +12,7 @@ import { PWABannerProvider } from "@/contexts/PWABannerContext";
 import { AirQualityProvider } from "@/contexts/AirQualityContext";
 import NotificationFloatingButton from "@/components/ui/notification-floating-button";
 import PWAInstallHelper from "@/lib/pwa-install-helper";
+import PWADebugPanel from "@/components/PWADebugPanel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://14eab50ee750.ngrok-free.app/",
+    url: "https://io-t-web-btit.vercel.app/",
     siteName: "Air Pollution Monitor",
     title: "Air Pollution Monitor - Track & Protect Your Environment",
     description: "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
@@ -128,7 +129,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://14eab50ee750.ngrok-free.app/"),
+  metadataBase: new URL("https://io-t-web-btit.vercel.app/"),
   alternates: {
     canonical: "/",
   },
@@ -163,6 +164,7 @@ export default function RootLayout({
               {children}
               <Footer />
               <NotificationFloatingButton />
+              <PWADebugPanel />
               {/* <AuthDebug /> */}
             </ReduxProvider>
           </AirQualityProvider>
