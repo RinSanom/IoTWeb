@@ -1,0 +1,47 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev",
+  "env": {
+    "NEXT_PUBLIC_APP_URL": "https://io-t-web-six.vercel.app",
+    "NEXT_PUBLIC_DOMAIN": "io-t-web-six.vercel.app",
+    "NEXT_PUBLIC_WEATHER_API": "https://api.open-meteo.com/v1/",
+    "NEXT_PUBLIC_AIR_QUALITY_API": "https://io-t-web-six.vercel.app/api/air-quality"
+  },
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "source": "/manifest.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/manifest+json"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sw.js",
+      "destination": "/_next/static/chunks/sw.js"
+    }
+  ]
+}

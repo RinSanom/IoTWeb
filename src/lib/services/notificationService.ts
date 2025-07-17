@@ -203,19 +203,24 @@ export class NotificationService {
   // Send subscription to server
   private async sendSubscriptionToServer(subscription: PushSubscription): Promise<void> {
     try {
-      const response = await fetch('/api/notifications/subscribe', {
+      // Use environment variable for API base URL or fall back to current origin
+      const apiUrl = process.env.NEXT_PUBLIC_APP_URL || (typeof window !== 'undefined' ? window.location.origin : '');
+      const endpoint = `${apiUrl}/api/notifications/subscribe`;
+      
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           subscription: subscription.toJSON(),
-          timestamp: Date.now()
+          timestamp: Date.now(),
+          origin: typeof window !== 'undefined' ? window.location.origin : apiUrl
         })
       });
 
       if (!response.ok) {
-        throw new Error('Failed to send subscription to server');
+        throw new Error(`Failed to send subscription to server: ${response.status}`);
       }
 
       console.log('Subscription sent to server successfully');
@@ -469,10 +474,16 @@ export class NotificationService {
       
       // Notify server about unsubscription
       try {
-        await fetch('/api/notifications/unsubscribe', {
+        const apiUrl = process.env.NEXT_PUBLIC_APP_URL || (typeof window !== 'undefined' ? window.location.origin : '');
+        const endpoint = `${apiUrl}/api/notifications/unsubscribe`;
+        
+        await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ timestamp: Date.now() })
+          body: JSON.stringify({ 
+            timestamp: Date.now(),
+            origin: typeof window !== 'undefined' ? window.location.origin : apiUrl
+          })
         });
       } catch (error) {
         console.error('Error notifying server about unsubscription:', error);

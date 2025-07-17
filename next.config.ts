@@ -5,6 +5,7 @@ const withPWA = require('next-pwa')({
   disable: process.env.NODE_ENV === 'development',
   register: true,
   skipWaiting: true,
+  sw: 'sw.js',
   runtimeCaching: [
     {
       urlPattern: /^https?.*/,
@@ -22,6 +23,8 @@ const withPWA = require('next-pwa')({
     document: '/offline.html',
   },
   publicExcludes: ['!noprecache/**/*'],
+  // Enable service worker on all origins
+  scope: '/',
 });
 
 const nextConfig: NextConfig = {
@@ -68,7 +71,7 @@ const nextConfig: NextConfig = {
 
   // Image optimization
   images: {
-    domains: ['localhost', '14eab50ee750.ngrok-free.app', 'daaa4fd7e035.ngrok-free.app'],
+    domains: ['localhost', '14eab50ee750.ngrok-free.app', 'daaa4fd7e035.ngrok-free.app', 'io-t-web-six.vercel.app'],
     formats: ['image/webp', 'image/avif'],
   },
   
