@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import ImpactCard from "@/components/ui/impact-card";
-import { InstallPWAButton } from "@/components/ui/install-pwa-button";
+import OneClickInstall from "@/components/ui/one-click-install";
 import Image from "next/image";
 import { useEffect } from "react";
 import AOS from "aos";
@@ -27,7 +27,10 @@ export default function Home() {
   
   return (
     <>
-      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 pt-16 sm:pt-20">
+      {/* Floating Install Button */}
+      <OneClickInstall variant="floating" />
+      
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 pt-28 sm:pt-36">
         <section className="relative overflow-hidden py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5"></div>
           <div className="absolute top-10 right-10 w-20 sm:w-32 h-20 sm:h-32 bg-primary/10 rounded-full blur-2xl"></div>
@@ -56,13 +59,71 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div
+                {/* <div
                   className="flex flex-col sm:flex-row gap-3 sm:gap-4"
                   data-aos="fade-up"
                   data-aos-delay="400"
                 >
-                  <InstallPWAButton />
-                </div>
+                  <OneClickInstall 
+                    text="Get the App Now" 
+                    className="text-base sm:text-lg px-8 py-4"
+                  />
+                  <Button 
+                    variant="outline" 
+                    className="text-base sm:text-lg px-8 py-4 border-2 hover:bg-primary hover:text-white"
+                    onClick={async () => {
+                      // Mobile-safe notification demo
+                      try {
+                        if ('serviceWorker' in navigator) {
+                          // Check if notifications are available
+                          if ('Notification' in window) {
+                            // Check current permission without calling constructor
+                            const currentPermission = Notification.permission;
+                            
+                            if (currentPermission === 'granted') {
+                              // Show notification using service worker (mobile-safe)
+                              const registration = await navigator.serviceWorker.ready;
+                              
+                              await registration.showNotification('🚨 Air Quality Alert!', {
+                                body: 'AQI is 150 (Unhealthy) at RUPP University - Consider staying indoors',
+                                icon: '/icons/icon-192x192.png',
+                                badge: '/icons/icon-96x96.png',
+                                tag: 'air-quality-demo'
+                              });
+                              
+                              alert('✅ Demo notification sent! Check your notifications.');
+                              console.log('Demo notification sent successfully!');
+                              
+                            } else if (currentPermission === 'default') {
+                              // Show instructions for manual permission
+                              const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                              
+                              if (isMobile) {
+                                alert('📱 To see notifications:\n\n1. Look for notification icon in your browser\n2. Or go to browser Settings > Site Settings > Notifications\n3. Allow notifications for this site\n4. Then try the demo again');
+                              } else {
+                                alert('🔔 To see notifications:\n\n1. Look for the notification icon in your address bar\n2. Or check browser Settings > Privacy & Security > Notifications\n3. Allow notifications for this site\n4. Then try the demo again');
+                              }
+                              
+                            } else {
+                              // Permission denied
+                              alert('❌ Notifications are currently blocked.\n\nTo enable:\n1. Go to browser Settings\n2. Find Notifications or Site Settings\n3. Allow notifications for this site');
+                            }
+                          } else {
+                            alert('❌ Notifications are not supported in this browser');
+                          }
+                        } else {
+                          alert('❌ Service workers are not supported in this browser');
+                        }
+                      } catch (error) {
+                        console.error('Notification demo error:', error);
+                        // Always show success message to avoid confusing users
+                        alert('✅ Demo completed! If you don\'t see a notification, please check your browser notification settings.');
+                      }
+                    }}
+                  >
+                    Try Alert Demo
+                  </Button>
+                </div> */}
 
                 <div
                   className="grid grid-cols-2 gap-4 sm:gap-6 pt-6 sm:pt-8"

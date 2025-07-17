@@ -3,18 +3,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { InstallPWAButton } from "@/components/ui/install-pwa-button";
+import PWAInstallButton from "@/components/ui/pwa-install-button";
+import AuthModal from "@/components/auth/AuthModal";
+import UserProfile from "@/components/auth/UserProfile";
+import { Button } from "@/components/ui/button";
+import { RootState } from "@/lib/store/store";
+import { useAuthInit } from "@/hooks/useAuthInit";
+import { usePWABanner } from "@/contexts/PWABannerContext";
 
 export const NAV_LINKS = [
   { name: "Air Quality", href: "/air-quality" },
-  { name: "About Us", href: "#" },
+  { name: "About Us", href: "/about" },
+  { name: "Settings", href: "/settings" },
 ];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const { isBannerVisible, bannerHeight } = usePWABanner();
+  
+  // Initialize auth state
+  useAuthInit();
 
   useEffect(() => {
     AOS.init({
@@ -52,8 +65,11 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+        className={`fixed left-0 right-0 z-40 transition-all duration-300
           bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg`}
+        style={{ 
+          top: isBannerVisible ? `${bannerHeight}px` : '0px' 
+        }}
         data-aos="fade-down"
       >
       <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
@@ -107,13 +123,30 @@ export default function Header() {
 
           {/* Right side buttons */}
           <div className="flex items-center gap-1 sm:gap-2 lg:gap-3">
-            {/* PWA Install Button - Desktop */}
+            {/* PWA Install Button */}
+            <div
+              className="hidden sm:block"
+              data-aos="fade-left"
+              data-aos-delay="250"
+            >
+              <PWAInstallButton variant="minimal" />
+            </div>
+
+            {/* Authentication - Desktop */}
             <div
               className="hidden lg:block"
               data-aos="fade-left"
               data-aos-delay="300"
             >
-              <InstallPWAButton />
+              {isAuthenticated ? (
+                <UserProfile />
+              ) : (
+                <AuthModal>
+                  <Button variant="outline" className="bg-white/10 dark:bg-gray-800/70 backdrop-blur-sm hover:bg-gray-100 dark:hover:bg-gray-700">
+                    Join with us
+                  </Button>
+                </AuthModal>
+              )}
             </div>
 
             {/* Dark Mode Toggle */}
@@ -216,9 +249,21 @@ export default function Header() {
             <div className="pt-3 sm:pt-4 border-t border-gray-200 dark:border-gray-700 space-y-3 sm:space-y-4">
               {/* PWA Install Button for Mobile */}
               <div className="w-full">
-                <InstallPWAButton />
+                <PWAInstallButton className="w-full justify-center" />
               </div>
-
+              
+              {/* Authentication for Mobile */}
+              <div className="w-full">
+                {isAuthenticated ? (
+                  <UserProfile />
+                ) : (
+                  <AuthModal>
+                    <Button variant="outline" className="w-full">
+                      Join with us
+                    </Button>
+                  </AuthModal>
+                )}
+              </div>
               {/* Dark Mode Toggle for Mobile */}
               <button
                 onClick={toggleDarkMode}

@@ -1,6 +1,33 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* PWA Banner Animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+/* Header positioning when PWA banner is visible */
+.header-with-banner {
+  top: 48px; /* Adjust based on banner height */
+}
+
+@media (min-width: 640px) {
+  .header-with-banner {
+    top: 56px; /* Larger banner height on larger screens */
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
@@ -303,6 +330,55 @@ a,
   }
 }
 
+/* PWA Install Helper Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.4s ease-out forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
+/* Enhanced PWA install success animation */
+.pwa-install-success {
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
 /* Enhanced mobile responsiveness */
 @media (max-width: 640px) {
   .container {
@@ -317,37 +393,6 @@ a,
   .text-5xl {
     font-size: 2.5rem;
   }
-}
-
-/* PWA Toast Animation */
-@keyframes slide-down {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.animate-slide-down {
-  animation: slide-down 0.3s ease-out;
-}
-
-@keyframes scale-in {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.animate-scale-in {
-  animation: scale-in 0.2s ease-out;
 }
 
 /* Print styles */

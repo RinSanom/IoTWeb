@@ -2,10 +2,16 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/layout/Header";
+import Footer from "@/layout/Footer";
 import ReduxProvider from "@/lib/store/ReduxProvider";
 import PWAInstaller from "@/components/PWAInstaller";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import PWAInstallBanner from "@/components/ui/pwa-install-banner";
 import { MobileInstallInstructions } from "@/components/MobileInstallInstructions";
+import { PWABannerProvider } from "@/contexts/PWABannerContext";
+import { AirQualityProvider } from "@/contexts/AirQualityContext";
+import NotificationFloatingButton from "@/components/ui/notification-floating-button";
+import PWAInstallHelper from "@/lib/pwa-install-helper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,7 +58,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://daaa4fd7e035.ngrok-free.app/",
+    url: "https://14eab50ee750.ngrok-free.app/",
     siteName: "Air Pollution Monitor",
     title: "Air Pollution Monitor - Track & Protect Your Environment",
     description: "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
@@ -79,13 +85,19 @@ export const metadata: Metadata = {
     maximumScale: 1,
   },
   icons: {
-    icon: "/icons/logo.png",
-    shortcut: "/icons/logo.png",
-    apple: "/icons/logo.png",
+    icon: [
+      { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512x512.png", sizes: "512x512", type: "image/png" }
+    ],
+    shortcut: "/icons/icon-192x192.png",
+    apple: [
+      { url: "/icons/icon-152x152.png", sizes: "152x152", type: "image/png" },
+      { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" }
+    ],
     other: [
       {
         rel: "apple-touch-icon-precomposed",
-        url: "/icons/logo.png",
+        url: "/icons/icon-152x152.png",
       },
     ],
   },
@@ -95,7 +107,7 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "Air Monitor",
     startupImage: [
-      "/icons/logo.png",
+      "/icons/icon-512x512.png",
     ],
   },
   other: {
@@ -116,7 +128,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://daaa4fd7e035.ngrok-free.app/"),
+  metadataBase: new URL("https://14eab50ee750.ngrok-free.app/"),
   alternates: {
     canonical: "/",
   },
@@ -135,16 +147,26 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Air Monitor" />
-        <link rel="apple-touch-icon" href="/icons/logo.png" />
-        <link rel="icon" href="/icons/logo.png" />
+        <link rel="apple-touch-icon" href="/icons/icon-152x152.png" />
+        <link rel="icon" href="/icons/icon-192x192.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <PWAInstallPrompt />
         <MobileInstallInstructions />
-        <Header />
-        <ReduxProvider>{children}</ReduxProvider>
+        <PWABannerProvider>
+          <AirQualityProvider>
+            <ReduxProvider>
+              <Header />
+              <PWAInstallBanner />
+              {children}
+              <Footer />
+              <NotificationFloatingButton />
+              {/* <AuthDebug /> */}
+            </ReduxProvider>
+          </AirQualityProvider>
+        </PWABannerProvider>
         <PWAInstaller />
       </body>
     </html>

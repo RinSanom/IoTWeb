@@ -21,12 +21,12 @@ export interface AirQualityResponse {
 export const airQualityApi = createApi({
   reducerPath: 'airQualityApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_AIR_QUALITY_API || 'http://127.0.0.1:8000',
+    baseUrl: '/api',
   }),
   tagTypes: ['AirQuality'],
   endpoints: (builder) => ({
     getAirQualityData: builder.query<AirQualityData[], void>({
-      query: () => '/air-quality/',
+      query: () => '/air-quality',
       providesTags: ['AirQuality'],
     }),
     getLatestAirQuality: builder.query<AirQualityData, void>({

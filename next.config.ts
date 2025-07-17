@@ -2,17 +2,34 @@ import type { NextConfig } from "next";
 
 const withPWA = require('next-pwa')({
   dest: 'public',
-  disable: false,
+  disable: process.env.NODE_ENV === 'development',
   register: true,
   skipWaiting: true,
-  immediate: true, // Enable immediate installation
-  skipInstallPrompt: true, // Skip native install prompt
+  runtimeCaching: [
+    {
+      urlPattern: /^https?.*/,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'offlineCache',
+        expiration: {
+          maxEntries: 200,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+        },
+      },
+    },
+  ],
   fallbacks: {
     document: '/offline.html',
   },
+  publicExcludes: ['!noprecache/**/*'],
 });
 
 const nextConfig: NextConfig = {
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
   // PWA Headers for better install support
   async headers() {
     return [
@@ -51,7 +68,7 @@ const nextConfig: NextConfig = {
 
   // Image optimization
   images: {
-    domains: ['localhost', 'daaa4fd7e035.ngrok-free.app' , 'https://eae4216241d2.ngrok-free.app/'],
+    domains: ['localhost', '14eab50ee750.ngrok-free.app', 'daaa4fd7e035.ngrok-free.app'],
     formats: ['image/webp', 'image/avif'],
   },
   

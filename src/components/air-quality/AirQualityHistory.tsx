@@ -8,76 +8,117 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Calendar, TrendingUp, TrendingDown } from "lucide-react";
+import { Clock, Calendar, TrendingUp, TrendingDown, AlertTriangle } from "lucide-react";
+import { useGetAirQualityDataQuery } from '@/lib/services/airQualityApi';
 
-const historyData = [
-  {
-    date: "Today",
-    time: "14:30",
-    aqi: 85,
-    status: "Moderate",
-    statusColor: "bg-yellow-500",
-    change: "+8",
-    trend: "up",
-  },
-  {
-    date: "Today",
-    time: "13:30",
-    aqi: 77,
-    status: "Moderate",
-    statusColor: "bg-yellow-500",
-    change: "-3",
-    trend: "down",
-  },
-  {
-    date: "Today",
-    time: "12:30",
-    aqi: 80,
-    status: "Moderate",
-    statusColor: "bg-yellow-500",
-    change: "+5",
-    trend: "up",
-  },
-  {
-    date: "Today",
-    time: "11:30",
-    aqi: 75,
-    status: "Moderate",
-    statusColor: "bg-yellow-500",
-    change: "-2",
-    trend: "down",
-  },
-  {
-    date: "Yesterday",
-    time: "22:00",
-    aqi: 65,
-    status: "Good",
-    statusColor: "bg-green-500",
-    change: "-8",
-    trend: "down",
-  },
-  {
-    date: "Yesterday",
-    time: "18:00",
-    aqi: 95,
-    status: "Moderate",
-    statusColor: "bg-yellow-500",
-    change: "+12",
-    trend: "up",
-  },
-];
+const getAQICategoryColor = (category: string) => {
+  switch (category.toLowerCase()) {
+    case 'good':
+      return 'bg-green-500 text-white';
+    case 'moderate':
+    case 'fair':
+      return 'bg-yellow-500 text-white';
+    case 'unhealthy for sensitive groups':
+      return 'bg-orange-500 text-white';
+    case 'unhealthy':
+      return 'bg-red-500 text-white';
+    case 'very unhealthy':
+      return 'bg-purple-500 text-white';
+    case 'hazardous':
+      return 'bg-maroon-500 text-white';
+    default:
+      return 'bg-gray-500 text-white';
+  }
+};
 
-const weeklyHistory = [
-  { day: "Monday", avgAqi: 72, status: "Good", trend: "down", change: -5 },
-  { day: "Tuesday", avgAqi: 85, status: "Moderate", trend: "up", change: +13 },
-  { day: "Wednesday", avgAqi: 68, status: "Good", trend: "down", change: -17 },
-  { day: "Thursday", avgAqi: 92, status: "Moderate", trend: "up", change: +24 },
-  { day: "Friday", avgAqi: 78, status: "Moderate", trend: "down", change: -14 },
-  { day: "Saturday", avgAqi: 65, status: "Good", trend: "down", change: -13 },
-  { day: "Sunday", avgAqi: 85, status: "Moderate", trend: "up", change: +20 },
-];
+const formatTimestamp = (timestamp: string) => {
+  return new Date(timestamp).toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
+
+const calculateTrend = (current: number, previous: number) => {
+  if (!previous) return { trend: 'neutral', change: 0 };
+  const change = current - previous;
+  const trend = change > 0 ? 'up' : change < 0 ? 'down' : 'neutral';
+  return { trend, change: Math.abs(change) };
+};
+
+const getStatusFromCategory = (category: string) => {
+  switch (category.toLowerCase()) {
+    case 'good':
+      return 'Good';
+    case 'moderate':
+    case 'fair':
+      return 'Moderate';
+    case 'unhealthy for sensitive groups':
+      return 'USG';
+    case 'unhealthy':
+      return 'Unhealthy';
+    case 'very unhealthy':
+      return 'Very Unhealthy';
+    case 'hazardous':
+      return 'Hazardous';
+    default:
+      return 'Unknown';
+  }
+};
 
 export default function AirQualityHistory() {
+  const { 
+    data: allData, 
+    error, 
+    isLoading 
+  } = useGetAirQualityDataQuery(undefined, {
+    pollingInterval: 60000, // Refetch every minute
+  });
+
+  if (isLoading) {
+    return (
+      <Card>
+        <CardContent className="flex items-center justify-center h-48">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading history...</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card>
+        <CardContent className="flex items-center justify-center h-48">
+          <div className="text-center">
+            <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+            <p className="text-red-600 mb-2">Failed to load history data</p>
+            <p className="text-sm text-gray-500">Please check your connection</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (!allData || allData.length === 0) {
+    return (
+      <Card>
+        <CardContent className="flex items-center justify-center h-48">
+          <div className="text-center">
+            <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-600">No history data available</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Get recent readings (last 50 for better history)
+  const recentReadings = allData.slice(0, 50);
+
   return (
     <div className="space-y-6" data-aos="fade-up" data-aos-delay="500">
       {/* Recent Readings */}
@@ -87,145 +128,53 @@ export default function AirQualityHistory() {
             <Clock className="h-5 w-5" />
             Recent Readings
           </CardTitle>
-          <CardDescription>Last 6 hourly measurements</CardDescription>
+          <CardDescription>Last {recentReadings.length} measurements from your sensors</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            {historyData.map((reading, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`w-3 h-3 ${reading.statusColor} rounded-full`}
-                  ></div>
-                  <div>
-                    <div className="font-medium text-sm">{reading.time}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">
-                      {reading.date}
+          <div className="space-y-3 max-h-40 overflow-y-auto pr-2 scrollbar-thin">
+            {recentReadings.map((reading, index) => {
+              const prevReading = allData[index + 1];
+              const pm25Trend = prevReading ? calculateTrend(reading.pm2_5, prevReading.pm2_5) : { trend: 'neutral', change: 0 };
+              
+              return (
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="text-center">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide">
+                        {new Date(reading.timestamp).toLocaleDateString()}
+                      </p>
+                      <p className="text-sm font-medium">{formatTimestamp(reading.timestamp)}</p>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="text-right">
-                    <div className="text-lg font-bold text-primary">
-                      {reading.aqi}
-                    </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">
-                      {reading.status}
-                    </div>
-                  </div>
-                  <div
-                    className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full ${
-                      reading.trend === "up"
-                        ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
-                        : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-                    }`}
-                  >
-                    {reading.trend === "up" ? (
-                      <TrendingUp className="h-3 w-3" />
-                    ) : (
-                      <TrendingDown className="h-3 w-3" />
-                    )}
-                    {reading.change}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
 
-      {/* Weekly Summary */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Calendar className="h-5 w-5" />
-            Weekly Summary
-          </CardTitle>
-          <CardDescription>Daily averages for the past week</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {weeklyHistory.map((day, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`w-3 h-3 rounded-full ${
-                      day.status === "Good" ? "bg-green-500" : "bg-yellow-500"
-                    }`}
-                  ></div>
-                  <div>
-                    <div className="font-medium text-sm">{day.day}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">
-                      {day.status}
+                  <div className="flex items-center gap-4">
+                    <div className="text-center">
+                      <p className="text-xs text-gray-500 mb-1">PM2.5</p>
+                      <div className="flex items-center gap-1">
+                        <span className="text-lg font-bold">{reading.pm2_5}</span>
+                        {pm25Trend.trend !== 'neutral' && (
+                          pm25Trend.trend === 'up' ? 
+                            <TrendingUp className="h-4 w-4 text-red-500" /> : 
+                            <TrendingDown className="h-4 w-4 text-green-500" />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="text-lg font-bold text-primary">
-                    {day.avgAqi}
-                  </div>
-                  <div
-                    className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full ${
-                      day.trend === "up"
-                        ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
-                        : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-                    }`}
-                  >
-                    {day.trend === "up" ? (
-                      <TrendingUp className="h-3 w-3" />
-                    ) : (
-                      <TrendingDown className="h-3 w-3" />
-                    )}
-                    {day.change > 0 ? "+" : ""}
-                    {day.change}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
 
-      {/* Air Quality Alerts */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Alerts</CardTitle>
-          <CardDescription>
-            Air quality warnings and notifications
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-              <div className="flex items-center gap-2 mb-1">
-                <Badge className="bg-yellow-500 text-white">Moderate</Badge>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  2 hours ago
-                </span>
-              </div>
-              <p className="text-sm">
-                Air quality reached moderate levels. Sensitive individuals
-                should limit outdoor activities.
-              </p>
-            </div>
-            <div className="p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-              <div className="flex items-center gap-2 mb-1">
-                <Badge className="bg-green-500 text-white">Good</Badge>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  Yesterday
-                </span>
-              </div>
-              <p className="text-sm">
-                Air quality improved to good levels. Safe for all outdoor
-                activities.
-              </p>
-            </div>
+                    <div className="text-center">
+                      <p className="text-xs text-gray-500 mb-1">PM10</p>
+                      <span className="text-lg font-bold">{reading.pm10}</span>
+                    </div>
+
+                    <Badge className={getAQICategoryColor(reading.aqi_category)}>
+                      {getStatusFromCategory(reading.aqi_category)}
+                    </Badge>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </CardContent>
       </Card>
