@@ -2,7 +2,23 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      // Register service worker
+      // Unregister any existing service workers first
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (let registration of registrations) {
+        await registration.unregister();
+        console.log('PWA: Unregistered old service worker');
+      }
+      
+      // Clear all caches
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        await Promise.all(
+          cacheNames.map(cacheName => caches.delete(cacheName))
+        );
+        console.log('PWA: Cleared all caches');
+      }
+      
+      // Register new service worker
       const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/'
       });
@@ -50,6 +66,13 @@ window.addEventListener('appinstalled', () => {
 });
 
 function showInstallButton() {
+  // Check if already installed
+  if (window.matchMedia('(display-mode: standalone)').matches || 
+      window.navigator.standalone === true) {
+    console.log('PWA: App already installed');
+    return;
+  }
+  
   // Create floating install button
   if (!installButton) {
     installButton = document.createElement('div');
@@ -70,13 +93,21 @@ function showInstallButton() {
         display: flex;
         align-items: center;
         gap: 8px;
+        animation: slideIn 0.3s ease-out;
       ">
         📱 Install App
       </button>
+      <style>
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+      </style>
     `;
     document.body.appendChild(installButton);
     
     document.getElementById('pwa-install-btn').addEventListener('click', installPWA);
+    console.log('PWA: Install button shown');
   }
 }
 
