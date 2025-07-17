@@ -150,6 +150,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Air Monitor" />
         <link rel="apple-touch-icon" href="/icons/icon-152x152.png" />
         <link rel="icon" href="/icons/icon-192x192.png" />
+        <script src="/pwa-enhanced.js" defer></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
