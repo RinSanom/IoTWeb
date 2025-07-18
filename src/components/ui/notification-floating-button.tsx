@@ -86,7 +86,7 @@ export default function NotificationFloatingButton() {
       )}
 
       {/* Floating Button */}
-      <div className="fixed bottom-6 left-6 z-50">
+      <div className="fixed bottom-24 right-6 z-50">
         <div className={`transition-all duration-300 ${isExpanded ? 'space-y-3' : ''}`}>
           {/* Expanded Options */}
           {isExpanded && (

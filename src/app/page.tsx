@@ -28,13 +28,13 @@ export default function Home() {
   return (
     <>
       {/* Floating Install Button */}
-      <OneClickInstall variant="floating" />
+      {/* <OneClickInstall variant="floating" /> */}
       
-      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 pt-28 sm:pt-36">
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 pt-28 sm:pt-36 overflow-x-hidden">
         <section className="relative overflow-hidden py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5"></div>
-          <div className="absolute top-10 right-10 w-20 sm:w-32 h-20 sm:h-32 bg-primary/10 rounded-full blur-2xl"></div>
-          <div className="absolute bottom-10 left-10 w-16 sm:w-24 h-16 sm:h-24 bg-secondary/10 rounded-full blur-xl"></div>
+          <div className="absolute top-10 right-4 sm:right-10 w-16 sm:w-20 md:w-32 h-16 sm:h-20 md:h-32 bg-primary/10 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-10 left-4 sm:left-10 w-12 sm:w-16 md:w-24 h-12 sm:h-16 md:h-24 bg-secondary/10 rounded-full blur-xl"></div>
           <div className="relative container mx-auto max-w-7xl">
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
               {/* Text Content */}
@@ -165,8 +165,8 @@ export default function Home() {
                 </div>
 
                 {/* Floating elements */}
-                <div className="absolute -top-4 sm:-top-6 -right-4 sm:-right-6 w-12 sm:w-16 h-12 sm:h-16 bg-primary/20 rounded-full animate-bounce" data-aos="fade-in" data-aos-delay="800"></div>
-                <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 w-8 sm:w-12 h-8 sm:h-12 bg-secondary/20 rounded-full animate-pulse" data-aos="fade-in" data-aos-delay="900"></div>
+                <div className="absolute -top-4 sm:-top-6 -right-2 sm:-right-4 md:-right-6 w-12 sm:w-16 h-12 sm:h-16 bg-primary/20 rounded-full animate-bounce" data-aos="fade-in" data-aos-delay="800"></div>
+                <div className="absolute -bottom-4 sm:-bottom-6 -left-2 sm:-left-4 md:-left-6 w-8 sm:w-12 h-8 sm:h-12 bg-secondary/20 rounded-full animate-pulse" data-aos="fade-in" data-aos-delay="900"></div>
               </div>
             </div>
           </div>

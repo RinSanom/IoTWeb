@@ -14,6 +14,7 @@ import { AirQualityProvider } from "@/contexts/AirQualityContext";
 import NotificationFloatingButton from "@/components/ui/notification-floating-button";
 import PWAInstallHelper from "@/lib/pwa-install-helper";
 import PWADebugPanel from "@/components/PWADebugPanel";
+import ChatbotFloatingButton from "@/components/ChatbotFloatingButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -139,26 +140,27 @@ export default function RootLayout({
         <script src="/pwa-enhanced.js" defer></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         {/* <PWAInstallPrompt /> */}
-        <MobileInstallInstructions />
         <PWABannerProvider>
           <AirQualityProvider>
             <ReduxProvider>
               <Header />
-              <PWAInstallBanner />
+              {/* <PWAInstallBanner /> */}
               {children}
               <Footer />
               <NotificationFloatingButton />
               {/* <PWADebugPanel /> */}
               {/* <AuthDebug /> */}
+              <ChatbotFloatingButton />
             </ReduxProvider>
           </AirQualityProvider>
         </PWABannerProvider>
-        <PWAInstaller />
-        {/* <PWAInstallPrompt /> */}
-        <IOSInstallPrompt />
+        <MobileInstallInstructions />
+        {/* <PWAInstaller /> */}
+        {/* <IOSInstallPrompt /> */}
+      
       </body>
     </html>
   );

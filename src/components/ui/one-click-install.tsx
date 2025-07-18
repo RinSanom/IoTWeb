@@ -107,7 +107,7 @@ export default function OneClickInstall({
         onClick={handleInstall}
         disabled={isInstalling}
         className={`
-          fixed bottom-6 right-6 p-4 bg-primary text-white rounded-full shadow-lg 
+          fixed bottom-[170px] right-6 p-4 bg-primary text-white rounded-full shadow-lg 
           hover:shadow-xl hover:bg-primary/90 active:scale-95 z-40
           ${baseButtonClasses}
           ${className}

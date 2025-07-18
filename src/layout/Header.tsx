@@ -72,8 +72,8 @@ export default function Header() {
         }}
         data-aos="fade-down"
       >
-      <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
-        <div className="flex h-14 sm:h-16 lg:h-20 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8 overflow-hidden">
+        <div className="flex h-14 sm:h-16 lg:h-20 items-center justify-between w-full">
           {/* Logo and Title */}
           <div
             className="flex items-center gap-1 sm:gap-2 lg:gap-3 min-w-0 flex-shrink-0"
@@ -86,8 +86,8 @@ export default function Header() {
                 <Image
                   src="/icons/logo.png"
                   alt="Logo"
-                  width={28}
-                  height={28}
+                  width={50}
+                  height={50}
                   className="relative z-10 transition-transform duration-300 group-hover:scale-110 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
                 />
               </div>
@@ -122,7 +122,7 @@ export default function Header() {
           </nav>
 
           {/* Right side buttons */}
-          <div className="flex items-center gap-1 sm:gap-2 lg:gap-3">
+          <div className="flex items-center gap-1 sm:gap-2 lg:gap-3 flex-shrink-0">
             {/* PWA Install Button */}
             <div
               className="hidden sm:block"
