@@ -16,10 +16,63 @@ export default function PWAInstaller() {
   useEffect(() => {
     console.log('PWA Installer: Initializing...');
     
-    // Check if service worker is supported
+    // Check if running on iOS
+    const isIOS = () => {
+      const userAgent = window.navigator.userAgent.toLowerCase();
+      return /iphone|ipad|ipod/.test(userAgent);
+    };
+
+    // Check if running in standalone mode
+    const isInStandaloneMode = () => ('standalone' in window.navigator) && 
+      ((window.navigator as any).standalone || window.matchMedia('(display-mode: standalone)').matches);
+
     if (typeof window === 'undefined') {
       console.log('PWA Installer: Window not available (SSR)');
       return;
+    }
+
+    // Show iOS-specific install prompt
+    if (isIOS() && !isInStandaloneMode()) {
+      console.log('PWA Installer: iOS device detected, showing install instructions');
+      // You can show a custom iOS install prompt here
+      const showIOSInstallPrompt = () => {
+        // Show your custom iOS install prompt component
+        const prompt = document.createElement('div');
+        prompt.innerHTML = `
+          <div class="ios-prompt" style="
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+          ">
+            <img src="/icons/icon-72x72.png" style="width: 30px; height: 30px;" alt="Air Monitor icon">
+            <div>
+              <div style="font-weight: bold; margin-bottom: 5px;">Install Air Monitor</div>
+              <div style="font-size: 14px;">Tap <img src="/icons/share-icon.png" style="width: 20px; vertical-align: middle;"> and then "Add to Home Screen"</div>
+            </div>
+            <button onclick="this.parentElement.remove()" style="
+              margin-left: 10px;
+              padding: 5px 10px;
+              border: none;
+              background: #eee;
+              border-radius: 5px;
+              cursor: pointer;
+            ">Close</button>
+          </div>
+        `;
+        document.body.appendChild(prompt);
+      };
+      
+      // Show the prompt after a short delay
+      setTimeout(showIOSInstallPrompt, 2000);
     }
 
     if (!('serviceWorker' in navigator)) {
@@ -27,7 +80,7 @@ export default function PWAInstaller() {
       return;
     }
 
-    // Register service worker manually as fallback
+    // Register service worker
     const registerServiceWorker = async () => {
       try {
         const registration = await navigator.serviceWorker.register('/sw.js', {
@@ -43,7 +96,13 @@ export default function PWAInstaller() {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                 console.log('PWA: New version available!');
-                // You could show a notification here
+                // Show update notification
+                if ('Notification' in window && Notification.permission === 'granted') {
+                  new Notification('Update Available', {
+                    body: 'A new version of Air Monitor is available. Refresh to update.',
+                    icon: '/icons/icon-192x192.png'
+                  });
+                }
               }
             });
           }

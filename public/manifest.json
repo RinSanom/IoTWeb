@@ -6,11 +6,31 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "scope": "/",
   "id": "air-pollution-monitor-pwa",
   "lang": "en",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "screenshots": [
+    {
+      "src": "/screenshots/mobile-1.jpg",
+      "sizes": "1170x2532",
+      "type": "image/jpeg",
+      "platform": "narrow",
+      "label": "Air Quality Dashboard"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Air Quality",
+      "short_name": "Air Quality",
+      "description": "Check current air quality readings",
+      "url": "/air-quality",
+      "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }]
+    }
+  ],
   "launch_handler": {
     "client_mode": "navigate-existing"
   },
@@ -50,7 +70,7 @@
       "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/icons/icon-384x384.png",
@@ -62,7 +82,19 @@
       "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "screenshots": [

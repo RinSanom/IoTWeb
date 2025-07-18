@@ -1,16 +1,34 @@
-// Enhanced PWA registration
+// Enhanced PWA registration for mobile devices
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      // Unregister any existing service workers first
-      const registrations = await navigator.serviceWorker.getRegistrations();
-      for (let registration of registrations) {
-        await registration.unregister();
-        console.log('PWA: Unregistered old service worker');
+      // For mobile Safari, we need a different approach
+      const isMobileSafari = /iPhone|iPad|iPod/i.test(navigator.userAgent) && /Safari/i.test(navigator.userAgent);
+      
+      if (isMobileSafari) {
+        // iOS Safari specific handling
+        console.log('PWA: Detected iOS Safari, using mobile-specific registration');
       }
       
-      // Clear all caches
-      if ('caches' in window) {
+      // Check if we're running in standalone mode (already installed)
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                          window.navigator.standalone === true;
+      
+      if (isStandalone) {
+        console.log('PWA: Already running in standalone mode');
+      }
+      
+      // Don't unregister existing service workers on mobile to prevent issues
+      if (!isMobileSafari) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (let registration of registrations) {
+          await registration.unregister();
+          console.log('PWA: Unregistered old service worker');
+        }
+      }
+      
+      // Clear caches only if not on mobile Safari
+      if ('caches' in window && !isMobileSafari) {
         const cacheNames = await caches.keys();
         await Promise.all(
           cacheNames.map(cacheName => caches.delete(cacheName))
@@ -20,7 +38,8 @@ if ('serviceWorker' in navigator) {
       
       // Register new service worker
       const registration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/'
+        scope: '/',
+        updateViaCache: 'none'
       });
       
       console.log('PWA: Service Worker registered successfully');
@@ -31,9 +50,12 @@ if ('serviceWorker' in navigator) {
         if (newWorker) {
           newWorker.addEventListener('statechange', () => {
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              // New version available
-              if (confirm('New version available! Reload to update?')) {
-                window.location.reload();
+              // New version available - be less aggressive on mobile
+              console.log('PWA: New version available');
+              if (!isMobileSafari) {
+                if (confirm('New version available! Reload to update?')) {
+                  window.location.reload();
+                }
               }
             }
           });
