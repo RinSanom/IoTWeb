@@ -63,8 +63,8 @@ export default function Header() {
                 <Image
                   src="/icons/logo.png"
                   alt="Logo"
-                  width={60}
-                  height={60}
+                  width={30}
+                  height={30}
                   className="relative z-10 transition-transform duration-300 group-hover:scale-110 sm:w-10 sm:h-10 lg:w-12 lg:h-12 dark:hidden"
                 />
                 <Image

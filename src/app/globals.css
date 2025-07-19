@@ -416,3 +416,9 @@ a,
     color: black !important;
   }
 }
+
+/* Custom: Remove focus outline from header elements */
+header *:focus {
+  outline: none;
+  box-shadow: none;
+}

@@ -80,7 +80,12 @@ export default function Footer() {
           <div className="space-y-6" data-aos="fade-up" data-aos-delay="100">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-xl bg-gradient-to-r from-primary to-primary/80">
-                <Heart className="h-8 w-8 text-white" />
+                <Image
+              src="/icons/logo-dark.png"
+              alt="Air Quality Monitor Logo"
+              width={50}
+              height={50}
+            />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-800 dark:text-white">

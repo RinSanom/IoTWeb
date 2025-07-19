@@ -72,13 +72,13 @@ export default function AboutUsPage() {
     }
   ];
   const teamMembers = [
-    { role: "Project Leader", name: "Yan Vanneth", specialty: "IoT Systems", photo: "/image/team/neth.jpg", bio: "Leading innovative IoT solutions for environmental monitoring", github: "https://github.com/YannVanneth", telegram: "#" },
+    { role: "Project Leader", name: "Yann Vanneth", specialty: "IoT Systems", photo: "/image/team/neth.jpg", bio: "Leading innovative IoT solutions for environmental monitoring", github: "https://github.com/YannVanneth", telegram: "#" },
     { role: "Hardware Engineer", name: "Heng Sivkim", specialty: "Sensor Integration", photo: "/image/team/kim.png", bio: "Expert in precision sensor calibration and hardware optimization", github: "https://github.com/SivkimHENG", telegram: "#" },
     { role: "Software Developer", name: "Rin Sanom", specialty: "Web Applications",  photo: "/image/team/nom.jpg", bio: "Full-stack developer passionate about clean, efficient code", github: "https://github.com/rinsanom", telegram: "#" },
     { role: "Data Scientist", name: "Mach Mol", specialty: "Environmental Data", photo: "/image/team/mol.JPG", bio: "Transforming complex environmental data into actionable insights", github: "https://github.com/MachMol27", telegram: "#" },
     { role: "Environmental Scientist", name: "Mon Sreynet", specialty: "Air Quality", photo: "/image/team/net.png", bio: "Environmental advocate with deep expertise in air quality research", github: "https://github.com/sreynetmon", telegram: "#" },
     { role: "Network Engineer", name: "Yeang Hongmeng", specialty: "IoT Networks", photo: "/image/team/hongmeng.png", bio: "Ensuring reliable connectivity for our monitoring infrastructure", github: "#", telegram: "#" },
-    { role: "UI/UX Designer", name: "Vith Socheata", specialty: "User Experience", photo: "/image/team/cheata.png", bio: "Creating intuitive interfaces that make data accessible to everyone", github: "https://github.com/socheatavit", telegram: "#" },
+    { role: "UI/UX Designer", name: "Vit Socheata", specialty: "User Experience", photo: "/image/team/cheata.png", bio: "Creating intuitive interfaces that make data accessible to everyone", github: "https://github.com/socheatavit", telegram: "#" },
     { role: "DevOps Engineer", name: "Lonh Raksmey", specialty: "Cloud Deployment", photo: "/image/team/raksmey.png", bio: "Building robust, scalable infrastructure for real-time monitoring", github: "https://github.com/stupiqqsmey", telegram: "#" },
     { role: "Quality Assurance", name: "Chan Vanarith", specialty: "Testing & Validation", photo: "/image/team/vanrith.png", bio: "Ensuring our systems deliver accurate, reliable environmental data", github: "#", telegram: "#" },
     { role: "Research Assistant", name: "Moung Meyneang ", specialty: "Academic Research", photo: "/image/team/meyneang.png", bio: "Bridging academic research with practical environmental solutions", github: "https://github.com/meyneangmoung", telegram: "#" }
