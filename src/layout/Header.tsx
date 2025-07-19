@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { RootState } from "@/lib/store/store";
 import { useAuthInit } from "@/hooks/useAuthInit";
 import { usePWABanner } from "@/contexts/PWABannerContext";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 export const NAV_LINKS = [
   { name: "Air Quality", href: "/air-quality" },
@@ -22,7 +23,6 @@ export const NAV_LINKS = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { isBannerVisible, bannerHeight } = usePWABanner();
   
@@ -36,31 +36,8 @@ export default function Header() {
       once: true,
     });
 
-    // Check for saved dark mode preference or default to light mode
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-    } else {
-      setIsDarkMode(false);
-      document.documentElement.classList.remove('dark');
-    }
   }, []);
 
-  const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-    
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
 
   return (
     <>
@@ -86,9 +63,16 @@ export default function Header() {
                 <Image
                   src="/icons/logo.png"
                   alt="Logo"
-                  width={50}
-                  height={50}
-                  className="relative z-10 transition-transform duration-300 group-hover:scale-110 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
+                  width={60}
+                  height={60}
+                  className="relative z-10 transition-transform duration-300 group-hover:scale-110 sm:w-10 sm:h-10 lg:w-12 lg:h-12 dark:hidden"
+                />
+                <Image
+                  src="/icons/logo-dark.png"
+                  alt="Logo"
+                  width={60}
+                  height={60}
+                  className="relative z-10 transition-transform duration-300 group-hover:scale-110 sm:w-10 sm:h-10 lg:w-12 lg:h-12 hidden dark:block"
                 />
               </div>
               <div className="flex flex-col min-w-0">
@@ -150,44 +134,7 @@ export default function Header() {
             </div>
 
             {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="p-1.5 sm:p-2 lg:p-3 rounded-lg transition-all duration-300 hover:scale-105 bg-white/10 dark:bg-gray-800/70 backdrop-blur-sm text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 flex-shrink-0"
-              data-aos="fade-left"
-              data-aos-delay="275"
-             aria-label="Toggle dark mode"
-            >
-              {isDarkMode ? (
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                  />
-                </svg>
-              )}
-            </button>
+            <ThemeSwitcher />
 
             {/* Mobile Menu Button */}
             <button
@@ -265,43 +212,10 @@ export default function Header() {
                 )}
               </div>
               {/* Dark Mode Toggle for Mobile */}
-              <button
-                onClick={toggleDarkMode}
-                className="flex items-center justify-between w-full px-3 sm:px-4 py-2 sm:py-3 text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-300 font-medium text-sm sm:text-base"
-              >
+              <div className="flex items-center justify-between w-full px-3 sm:px-4 py-2 sm:py-3 text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-300 font-medium text-sm sm:text-base">
                 <span>Dark Mode</span>
-                <div className="flex items-center gap-2">
-                  {isDarkMode ? (
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                      />
-                    </svg>
-                  )}
-                </div>
-              </button>
+                <ThemeSwitcher />
+              </div>
             </div>
           </div>
         </div>

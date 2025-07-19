@@ -11,10 +11,12 @@ import { MobileInstallInstructions } from "@/components/MobileInstallInstruction
 import { IOSInstallPrompt } from "@/components/IOSInstallPrompt";
 import { PWABannerProvider } from "@/contexts/PWABannerContext";
 import { AirQualityProvider } from "@/contexts/AirQualityContext";
-import NotificationFloatingButton from "@/components/ui/notification-floating-button";
 import PWAInstallHelper from "@/lib/pwa-install-helper";
 import PWADebugPanel from "@/components/PWADebugPanel";
+import { ClientOnly } from "@/components/ClientOnly";
+import NotificationFloatingButton from "@/components/ui/notification-floating-button";
 import ChatbotFloatingButton from "@/components/ChatbotFloatingButton";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -105,10 +107,6 @@ export const metadata: Metadata = {
     maximumScale: 1,
     viewportFit: "cover",
   },
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#2563eb" },
-    { media: "(prefers-color-scheme: dark)", color: "#1e40af" },
-  ],
   other: {
     "mobile-web-app-capable": "yes",
     "application-name": "Air Monitor",
@@ -123,7 +121,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#2563eb" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -143,20 +140,29 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         {/* <PWAInstallPrompt /> */}
-        <PWABannerProvider>
-          <AirQualityProvider>
-            <ReduxProvider>
-              <Header />
-              {/* <PWAInstallBanner /> */}
-              {children}
-              <Footer />
-              <NotificationFloatingButton />
-              {/* <PWADebugPanel /> */}
-              {/* <AuthDebug /> */}
-              <ChatbotFloatingButton />
-            </ReduxProvider>
-          </AirQualityProvider>
-        </PWABannerProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <PWABannerProvider>
+            <AirQualityProvider>
+              <ReduxProvider>
+                <Header />
+                {/* <PWAInstallBanner /> */}
+                {children}
+                <Footer />
+                <ClientOnly>
+                  <NotificationFloatingButton />
+                  <ChatbotFloatingButton />
+                </ClientOnly>
+                {/* <PWADebugPanel /> */}
+                {/* <AuthDebug /> */}
+              </ReduxProvider>
+            </AirQualityProvider>
+          </PWABannerProvider>
+        </ThemeProvider>
         <MobileInstallInstructions />
         {/* <PWAInstaller /> */}
         {/* <IOSInstallPrompt /> */}

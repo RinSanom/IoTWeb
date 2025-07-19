@@ -184,8 +184,8 @@ export default function AirQualityRealTime() {
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-3xl font-bold text-gray-900">Air Quality Monitor</CardTitle>
-              <p className="text-sm text-gray-600 mt-1">
+              <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white">Air Quality Monitor</CardTitle>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 Last updated: {lastRefresh.toLocaleTimeString()}
               </p>
             </div>
@@ -247,10 +247,10 @@ export default function AirQualityRealTime() {
                 </div>
               </div>
               <div className="space-y-1">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   {getAQILevel(latestData?.aqi_category || '').description}
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-500 dark:text-gray-400">
                   Last reading: {latestData ? formatTimestamp(latestData.timestamp) : 'No data'}
                 </p>
               </div>
@@ -259,74 +259,74 @@ export default function AirQualityRealTime() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {/* PM2.5 */}
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-blue-100 rounded-full">
+                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
                     <Wind className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-600">PM2.5</p>
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-300">PM2.5</p>
                     <p className="text-2xl font-bold">{latestData?.pm2_5 || '--'}</p>
-                    <p className="text-xs text-gray-500">μg/m³</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">μg/m³</p>
                   </div>
                 </div>
 
                 {/* PM10 */}
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-green-100 rounded-full">
+                  <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-full">
                     <Wind className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-600">PM10</p>
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-300">PM10</p>
                     <p className="text-2xl font-bold">{latestData?.pm10 || '--'}</p>
-                    <p className="text-xs text-gray-500">μg/m³</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">μg/m³</p>
                   </div>
                 </div>
 
                 {/* NO2 */}
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-orange-100 rounded-full">
+                  <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-full">
                     <Activity className="h-6 w-6 text-orange-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-600">NO₂</p>
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-300">NO₂</p>
                     <p className="text-2xl font-bold">{latestData?.no2 || '--'}</p>
-                    <p className="text-xs text-gray-500">μg/m³</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">μg/m³</p>
                   </div>
                 </div>
 
                 {/* O3 */}
                 <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-purple-100 rounded-full">
+                  <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full">
                     <Droplets className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-600">O₃</p>
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-300">O₃</p>
                     <p className="text-2xl font-bold">{latestData?.o3 || '--'}</p>
-                    <p className="text-xs text-gray-500">μg/m³</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">μg/m³</p>
                   </div>
                 </div>
               </div>
 
               {/* Additional pollutants */}
               <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm font-medium text-gray-600">CO</p>
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-300">CO</p>
                   <p className="text-xl font-bold">{latestData?.co || '--'}</p>
-                  <p className="text-xs text-gray-500">mg/m³</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">mg/m³</p>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm font-medium text-gray-600">SO₂</p>
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-300">SO₂</p>
                   <p className="text-xl font-bold">{latestData?.so2 || '--'}</p>
-                  <p className="text-xs text-gray-500">μg/m³</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">μg/m³</p>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm font-medium text-gray-600">NH₃</p>
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-300">NH₃</p>
                   <p className="text-xl font-bold">{latestData?.nh3 || '--'}</p>
-                  <p className="text-xs text-gray-500">μg/m³</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">μg/m³</p>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm font-medium text-gray-600">Pb</p>
+                <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Pb</p>
                   <p className="text-xl font-bold">{latestData?.pb || '--'}</p>
-                  <p className="text-xs text-gray-500">μg/m³</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">μg/m³</p>
                 </div>
               </div>
             </CardContent>
@@ -342,13 +342,13 @@ export default function AirQualityRealTime() {
               <Clock className="h-5 w-5" />
               Air Quality History
             </CardTitle>
-            <p className="text-sm text-gray-600">Recent readings from your sensors</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Recent readings from your sensors</p>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b bg-gray-50">
+                  <tr className="border-b bg-gray-50 dark:bg-gray-800">
                     <th className="text-left p-3 font-medium">Time</th>
                     <th className="text-left p-3 font-medium">Status</th>
                     <th className="text-left p-3 font-medium">PM2.5</th>
@@ -365,7 +365,7 @@ export default function AirQualityRealTime() {
                     const pm25Trend = prevReading ? calculateTrend(reading.pm2_5, prevReading.pm2_5) : { trend: 'neutral', change: 0 };
                     
                     return (
-                      <tr key={index} className="border-b hover:bg-gray-50 transition-colors">
+                      <tr key={index} className="border-b hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                         <td className="p-3">{formatTimestamp(reading.timestamp)}</td>
                         <td className="p-3">
                           <Badge className={getAQICategoryColor(reading.aqi_category)} variant="outline">
@@ -404,7 +404,7 @@ export default function AirQualityRealTime() {
           <Card>
             <CardHeader>
               <CardTitle>Particulate Matter (PM2.5 & PM10)</CardTitle>
-              <p className="text-sm text-gray-600">Last 24 hours trend</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Last 24 hours trend</p>
             </CardHeader>
             <CardContent>
               <div className="h-80">
@@ -444,7 +444,7 @@ export default function AirQualityRealTime() {
           <Card>
             <CardHeader>
               <CardTitle>Gas Pollutants (NO₂ & O₃)</CardTitle>
-              <p className="text-sm text-gray-600">Last 24 hours trend</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Last 24 hours trend</p>
             </CardHeader>
             <CardContent>
               <div className="h-80">
@@ -488,7 +488,7 @@ export default function AirQualityRealTime() {
           <Card>
             <CardHeader>
               <CardTitle>Other Pollutants (CO & SO₂)</CardTitle>
-              <p className="text-sm text-gray-600">Last 24 hours trend</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Last 24 hours trend</p>
             </CardHeader>
             <CardContent>
               <div className="h-80">
@@ -532,8 +532,8 @@ export default function AirQualityRealTime() {
           <CardContent className="flex items-center justify-center h-48">
             <div className="text-center">
               <AlertTriangle className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-              <p className="text-gray-600 mb-2">No air quality data available</p>
-              <p className="text-sm text-gray-500">
+              <p className="text-gray-600 dark:text-gray-300 mb-2">No air quality data available</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Make sure your sensor is connected and sending data
               </p>
             </div>

@@ -144,7 +144,7 @@ export default function NotificationSettingsPage() {
                 General
               </div>
             </button>
-            <button
+            {/* <button
               onClick={() => setActiveTab('debug')}
               className={`px-4 py-2 font-medium transition-colors duration-200 border-b-2 ${
                 activeTab === 'debug'
@@ -156,7 +156,7 @@ export default function NotificationSettingsPage() {
                 <Bug className="h-4 w-4" />
                 Debug
               </div>
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -174,9 +174,9 @@ export default function NotificationSettingsPage() {
             <NotificationSettings />
           )}
 
-          {activeTab === 'debug' && (
+          {/* {activeTab === 'debug' && (
             <NotificationDebugger />
-          )}
+          )} */}
           
           {activeTab === 'general' && (
             <div className="space-y-6">
