@@ -20,7 +20,7 @@ import {
 export default function AboutUsPage() {
   useEffect(() => {
     AOS.init({
-      duration: 800,
+      duration: 500,
       easing: "ease-in-out",
       once: true,
       offset: 50,
@@ -164,7 +164,7 @@ export default function AboutUsPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <div key={index} data-aos="fade-up" data-aos-delay={500 + index * 100}>
+              <div key={index} data-aos="fade-up" data-aos-delay={200 + index * 100}>
                 <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl p-6 text-center">
                   <div className="flex justify-center mb-4" data-aos="zoom-in" data-aos-delay={600 + index * 100}>
                     <div className="p-3 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5">
@@ -348,6 +348,7 @@ export default function AboutUsPage() {
                 <br />
                 <span className="inline-block px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full">TypeScript</span>
                 <span className="inline-block px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full ml-2">Tailwind</span>
+                <span className="inline-block px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full ml-2">Python</span>
               </div>
             </div>
 
@@ -370,63 +371,7 @@ export default function AboutUsPage() {
         </section>
 
         {/* Impact Section */}
-        <section data-aos="fade-up" data-aos-delay="600">
-          <div className="relative overflow-hidden bg-gradient-to-r from-primary to-primary/80 text-white rounded-2xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70"></div>
-            <div className="relative p-8 text-center">
-              <div className="flex justify-center mb-6" data-aos="zoom-in" data-aos-delay="700">
-                <div className="p-4 rounded-2xl bg-white/20 backdrop-blur-sm">
-                  <Award className="h-16 w-16" />
-                </div>
-              </div>
-              <h2 className="text-3xl font-bold mb-4" data-aos="fade-up" data-aos-delay="800">Creating Impact Together</h2>
-              <p className="text-xl opacity-90 max-w-3xl mx-auto leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="900">
-                More than just a monitoring system - we&apos;re building a movement. Every data point collected, 
-                every alert sent, and every insight shared brings us closer to cleaner air for all Cambodians. 
-                This is our contribution to a healthier, more sustainable future.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8" data-aos="fade-up" data-aos-delay="1000">
-                <div data-aos="fade-up" data-aos-delay="1100">
-                  <div className="text-3xl font-bold">24/7</div>
-                  <div className="text-sm opacity-80">Continuous Monitoring</div>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="1200">
-                  <div className="text-3xl font-bold">6+</div>
-                  <div className="text-sm opacity-80">Sensor Types</div>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="1300">
-                  <div className="text-3xl font-bold">10</div>
-                  <div className="text-sm opacity-80">Team Members</div>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="1400">
-                  <div className="text-3xl font-bold">1</div>
-                  <div className="text-sm opacity-80">Shared Vision</div>
-                </div>
-              </div>
-              
-              {/* Call to Action */}
-              <div className="mt-8 pt-6 border-t border-white/20" data-aos="fade-up" data-aos-delay="1500">
-                <p className="text-lg mb-4 opacity-90" data-aos="fade-up" data-aos-delay="1600">
-                  Join us in monitoring, understanding, and protecting Cambodia&apos;s air quality
-                </p>
-                <div className="flex flex-wrap justify-center gap-4">
-                  <span className="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm" data-aos="fade-right" data-aos-delay="1700">
-                    🌱 Environmental Protection
-                  </span>
-                  <span className="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm" data-aos="fade-up" data-aos-delay="1800">
-                    💚 Public Health
-                  </span>
-                  <span className="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm" data-aos="fade-down" data-aos-delay="1900">
-                    📊 Data-Driven Decisions
-                  </span>
-                  <span className="px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-sm" data-aos="fade-left" data-aos-delay="2000">
-                    🤝 Community Engagement
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+     
       </div>
     </main>
   );

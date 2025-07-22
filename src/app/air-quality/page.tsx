@@ -10,13 +10,7 @@ import AirQualityRealTime from "@/components/air-quality/AirQualityRealTime";
 import { useGetWeatherQuery } from "@/lib/services/weatherApi";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  RefreshCw,
-  MapPin,
-  Clock,
-  Filter,
-  Search,
-} from "lucide-react";
+import { RefreshCw, MapPin, Clock, Filter, Search } from "lucide-react";
 
 export default function AirQualityPage() {
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -25,14 +19,20 @@ export default function AirQualityPage() {
   const [alertsEnabled, setAlertsEnabled] = useState(true);
 
   // Phnom Penh coordinates
-  const { data: weatherData, error: weatherError, isLoading: weatherLoading } = useGetWeatherQuery({
+  const {
+    data: weatherData,
+    error: weatherError,
+    isLoading: weatherLoading,
+  } = useGetWeatherQuery({
     latitude: 11.5564,
     longitude: 104.9282,
   });
 
   // Get current temperature (first value in the hourly array)
   const currentTemperature = weatherData?.hourly?.temperature_2m?.[0];
-  const formattedTemperature = currentTemperature ? `${Math.round(currentTemperature)}°C` : '28°C';
+  const formattedTemperature = currentTemperature
+    ? `${Math.round(currentTemperature)}°C`
+    : "28°C";
 
   useEffect(() => {
     AOS.init({
@@ -68,7 +68,7 @@ export default function AirQualityPage() {
     return "Hazardous";
   };
 
-  const currentAQI = 85;
+  const currentAQI = weatherData?.hourly?.temperature_2m?.[0] ? 85 : 85; // Will be replaced by real AQI from API
   const currentStatus = getAQIStatus(currentAQI);
   const currentColor = getAQIColor(currentAQI);
 
@@ -127,10 +127,9 @@ export default function AirQualityPage() {
                   />
                   Refresh
                 </Button>
-                
               </div>
             </div>
-          </div>  
+          </div>
         </div>
 
         {/* Real-time Air Quality Data from MQTT */}
@@ -151,19 +150,19 @@ export default function AirQualityPage() {
               </Card>
             </div>
             <div className="lg:col-span-1 xl:col-span-2">
-               <div className="lg:col-span-1 xl:col-span-2">
-              <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200 dark:border-slate-700 shadow-2xl">
-                <CardHeader className="pb-3 sm:pb-4">
-                  <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
-                    <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
-                    Recent Activity
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-0">
-                  <AirQualityHistory />
-                </CardContent>
-              </Card>
-            </div>
+              <div className="lg:col-span-1 xl:col-span-2">
+                <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-slate-200 dark:border-slate-700 shadow-2xl">
+                  <CardHeader className="pb-3 sm:pb-4">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                      <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
+                      Recent Activity
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <AirQualityHistory />
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
           <div className="w-full" data-aos="fade-up" data-aos-delay="300">
@@ -196,8 +195,7 @@ export default function AirQualityPage() {
             className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6"
             data-aos="fade-up"
             data-aos-delay="400"
-          >
-          </div>
+          ></div>
         </div>
       </div>
     </div>

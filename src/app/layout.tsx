@@ -31,20 +31,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: "Air Pollution Monitor - Track & Protect Your Environment",
-    template: "%s | Air Pollution Monitor"
+    template: "%s | Air Pollution Monitor",
   },
-  description: "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform. Get weather updates and environmental insights.",
+  description:
+    "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform. Get weather updates and environmental insights.",
   keywords: [
     "air pollution",
     "air quality",
     "environmental monitoring",
     "weather tracking",
-    "pollution data",    
+    "pollution data",
     "health protection",
     "environmental health",
     "air quality index",
     "pollution monitoring",
-    "environmental awareness"
+    "environmental awareness",
   ],
   authors: [{ name: "Air Pollution Monitor Team" }],
   creator: "Air Pollution Monitor",
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icons/icon-512x512.png", sizes: "512x512", type: "image/png" }
+      { url: "/icons/icon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [
       { url: "/icons/icon-152x152.png", sizes: "152x152", type: "image/png" },
@@ -85,7 +86,8 @@ export const metadata: Metadata = {
     url: process.env.NEXT_PUBLIC_APP_URL || "https://io-t-web-btit.vercel.app",
     siteName: "Air Pollution Monitor",
     title: "Air Pollution Monitor - Track & Protect Your Environment",
-    description: "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
+    description:
+      "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
     images: [
       {
         url: "/image/image.png",
@@ -98,7 +100,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Air Pollution Monitor - Track & Protect Your Environment",
-    description: "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
+    description:
+      "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
     images: ["/image/image.png"],
   },
   viewport: {
@@ -119,19 +122,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
         <meta name="apple-mobile-web-app-title" content="Air Monitor" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="HandheldFriendly" content="true" />
         <meta name="MobileOptimized" content="width" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover"
+        />
         <link rel="apple-touch-icon" href="/icons/icon-152x152.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
-        <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="152x152"
+          href="/icons/icon-152x152.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="192x192"
+          href="/icons/icon-192x192.png"
+        />
         <link rel="icon" href="/icons/icon-192x192.png" />
         <link rel="manifest" href="/manifest.json" />
         <script src="/pwa-enhanced.js" defer></script>
@@ -166,7 +183,6 @@ export default function RootLayout({
         <MobileInstallInstructions />
         {/* <PWAInstaller /> */}
         {/* <IOSInstallPrompt /> */}
-      
       </body>
     </html>
   );
