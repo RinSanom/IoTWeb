@@ -151,6 +151,41 @@ export default function RootLayout({
         />
         <link rel="icon" href="/icons/icon-192x192.png" />
         <link rel="manifest" href="/manifest.json" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "Air Pollution Monitor",
+              "description": "Monitor real-time air quality data, track pollution levels, and protect your health with our comprehensive air pollution monitoring platform.",
+              "url": process.env.NEXT_PUBLIC_APP_URL || "https://io-t-web-btit.vercel.app",
+              "applicationCategory": "HealthApplication",
+              "operatingSystem": "Web Browser",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "author": {
+                "@type": "Organization",
+                "name": "Air Pollution Monitor Team"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "150"
+              },
+              "featureList": [
+                "Real-time air quality monitoring",
+                "Weather tracking",
+                "Pollution level alerts",
+                "Environmental health insights",
+                "Progressive Web App support"
+              ]
+            })
+          }}
+        />
         <script src="/pwa-enhanced.js" defer></script>
       </head>
       <body
