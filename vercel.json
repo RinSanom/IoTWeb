@@ -1,8 +1,8 @@
 {
-  "buildCommand": "prisma generate && npm run build",
+  "buildCommand": "npx prisma generate && npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "installCommand": "npm install && prisma generate",
+  "installCommand": "npm install && npx prisma generate",
   "devCommand": "npm run dev",
   "env": {
     "NEXT_PUBLIC_APP_URL": "https://io-t-web-btit.vercel.app",
