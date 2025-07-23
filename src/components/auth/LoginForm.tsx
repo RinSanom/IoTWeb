@@ -45,7 +45,7 @@ export default function LoginForm({ onSwitchToRegister, onClose }: LoginFormProp
       const authResult = await login(data).unwrap();
       
       // After successful login, fetch user profile
-      const profileResponse = await fetch(`${process.env.NEXT_PUBLIC_AIR_QUALITY_API}/auth/profile/`, {
+      const profileResponse = await fetch(`http://127.0.0.1:8000/auth/profile/`, {
         headers: {
           'Authorization': `Bearer ${authResult.access}`,
           'Content-Type': 'application/json',
