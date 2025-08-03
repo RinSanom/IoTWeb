@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 // POST - Login/Register
 export async function POST(request: NextRequest) {
   let body: any;
-  
+
   try {
     body = await request.json();
     const { email, password, action = "login" } = body;
@@ -11,21 +11,19 @@ export async function POST(request: NextRequest) {
     console.log(`Attempting ${action} for user:`, email);
 
     // Forward authentication request to your auth server
-    const authServerUrl = process.env.AUTH_SERVER_URL || process.env.NEXT_PUBLIC_AUTH_API;
-    const authResponse = await fetch(
-      `${authServerUrl}/auth/${action}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      }
-    );
+    const authServerUrl =
+      process.env.AUTH_SERVER_URL || process.env.NEXT_PUBLIC_AUTH_API;
+    const authResponse = await fetch(`${authServerUrl}/auth/${action}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
 
     const authData = await authResponse.json();
 
@@ -47,20 +45,23 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Authentication error:", error);
-    
+
     // In production, if auth server is not accessible, provide fallback
-    if (process.env.NODE_ENV === 'production' && error instanceof Error && 
-        (error.message.includes('ECONNREFUSED') || error.message.includes('fetch failed'))) {
-      
+    if (
+      process.env.NODE_ENV === "production" &&
+      error instanceof Error &&
+      (error.message.includes("ECONNREFUSED") ||
+        error.message.includes("fetch failed"))
+    ) {
       // Use the body data that was already parsed
       const { email, password, action = "login" } = body || {};
-      
-      if (action === 'register') {
+
+      if (action === "register") {
         return NextResponse.json({
           success: true,
           data: {
             user: { email, id: Date.now() },
-            token: `demo-token-${Date.now()}`
+            token: `demo-token-${Date.now()}`,
           },
           message: "Registration successful (demo mode)",
         });
@@ -71,14 +72,14 @@ export async function POST(request: NextRequest) {
             success: true,
             data: {
               user: { email, id: Date.now() },
-              token: `demo-token-${Date.now()}`
+              token: `demo-token-${Date.now()}`,
             },
             message: "Login successful (demo mode)",
           });
         }
       }
     }
-    
+
     return NextResponse.json(
       {
         success: false,

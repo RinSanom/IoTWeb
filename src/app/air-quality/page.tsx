@@ -7,6 +7,9 @@ import AirQualityDashboard from "@/components/air-quality/AirQualityDashboard";
 import AirQualityMap from "@/components/air-quality/AirQualityMap";
 import AirQualityHistory from "@/components/air-quality/AirQualityHistory";
 import AirQualityRealTime from "@/components/air-quality/AirQualityRealTime";
+import MLPredictions from "@/components/air-quality/MLPredictions";
+import MLForecasts from "@/components/air-quality/MLForecasts";
+import HealthAdviceDemo from "@/components/air-quality/HealthAdviceDemo";
 import { useGetWeatherQuery } from "@/lib/services/weatherApi";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -190,6 +193,14 @@ export default function AirQualityPage() {
               </CardContent>
             </Card>
           </div>
+
+          {/* ML Predictions and Forecasts */}
+          <div className="space-y-6" data-aos="fade-up" data-aos-delay="500">
+            <MLPredictions />
+            <MLForecasts />
+            <HealthAdviceDemo />
+          </div>
+
           {/* Analytics Section */}
           <div
             className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6"
