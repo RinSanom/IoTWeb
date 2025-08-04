@@ -1,0 +1,373 @@
+{
+  "info": {
+    "api_version": "1.0",
+    "model_accuracy": "99.95%",
+    "description": "AQI Machine Learning Prediction API",
+    "endpoints": [
+      "/api/current - Current AQI status",
+      "/api/forecast/hourly - 24-hour forecast",
+      "/api/forecast/daily - 7-day forecast"
+    ]
+  },
+  "current": {
+    "aqi": 55.2,
+    "category": "Moderate",
+    "color": "#FFFF00",
+    "timestamp": "2025-08-03T23:57:31",
+    "parameters": {
+      "pm1": 5.99,
+      "pm25": 18.17,
+      "temperature": 21.7,
+      "humidity": 62.3,
+      "ultrafine_particles": 880.8
+    }
+  },
+  "forecast": {
+    "hourly": [
+      {
+        "datetime": "2025-08-03T23:57:31",
+        "predicted_aqi": 55.2,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 5.99,
+          "pm25": 18.17,
+          "temperature": 21.7,
+          "humidity": 62.3,
+          "ultrafine_particles": 880.8
+        },
+        "temporal_info": {
+          "hour": 23,
+          "day_of_week": 6,
+          "month": 8,
+          "is_weekend": true
+        }
+      },
+      {
+        "datetime": "2025-08-04T00:57:31",
+        "predicted_aqi": 56.5,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 9.08,
+          "pm25": 17.59,
+          "temperature": 21.9,
+          "humidity": 58.0,
+          "ultrafine_particles": 1259.8
+        },
+        "temporal_info": {
+          "hour": 0,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T01:57:31",
+        "predicted_aqi": 60.9,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 5.5,
+          "pm25": 21.93,
+          "temperature": 21.7,
+          "humidity": 54.7,
+          "ultrafine_particles": 1720.2
+        },
+        "temporal_info": {
+          "hour": 1,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T02:57:31",
+        "predicted_aqi": 54.2,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 9.07,
+          "pm25": 16.06,
+          "temperature": 23.2,
+          "humidity": 58.7,
+          "ultrafine_particles": 1414.4
+        },
+        "temporal_info": {
+          "hour": 2,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T03:57:31",
+        "predicted_aqi": 64.0,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 8.26,
+          "pm25": 22.72,
+          "temperature": 26.4,
+          "humidity": 57.8,
+          "ultrafine_particles": 1433.4
+        },
+        "temporal_info": {
+          "hour": 3,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T04:57:31",
+        "predicted_aqi": 65.8,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 13.23,
+          "pm25": 21.84,
+          "temperature": 23.2,
+          "humidity": 57.0,
+          "ultrafine_particles": 1855.8
+        },
+        "temporal_info": {
+          "hour": 4,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T05:57:31",
+        "predicted_aqi": 68.7,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 12.31,
+          "pm25": 24.07,
+          "temperature": 25.7,
+          "humidity": 47.9,
+          "ultrafine_particles": 2059.7
+        },
+        "temporal_info": {
+          "hour": 5,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T06:57:31",
+        "predicted_aqi": 73.3,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 16.25,
+          "pm25": 25.41,
+          "temperature": 27.8,
+          "humidity": 50.1,
+          "ultrafine_particles": 1613.8
+        },
+        "temporal_info": {
+          "hour": 6,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T07:57:31",
+        "predicted_aqi": 72.8,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 14.67,
+          "pm25": 25.71,
+          "temperature": 27.5,
+          "humidity": 56.7,
+          "ultrafine_particles": 1926.7
+        },
+        "temporal_info": {
+          "hour": 7,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T08:57:31",
+        "predicted_aqi": 63.6,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 12.23,
+          "pm25": 20.82,
+          "temperature": 29.2,
+          "humidity": 38.7,
+          "ultrafine_particles": 1698.7
+        },
+        "temporal_info": {
+          "hour": 8,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T09:57:31",
+        "predicted_aqi": 63.1,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 10.8,
+          "pm25": 21.1,
+          "temperature": 31.0,
+          "humidity": 63.0,
+          "ultrafine_particles": 2138.2
+        },
+        "temporal_info": {
+          "hour": 9,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-04T10:57:31",
+        "predicted_aqi": 58.1,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 9.74,
+          "pm25": 17.62,
+          "temperature": 32.3,
+          "humidity": 62.1,
+          "ultrafine_particles": 1828.8
+        },
+        "temporal_info": {
+          "hour": 10,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      }
+    ],
+    "daily": [
+      {
+        "datetime": "2025-08-03T12:57:31",
+        "predicted_aqi": 53.0,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 10.62,
+          "pm25": 13.75,
+          "temperature": 32.4,
+          "humidity": 59.4,
+          "ultrafine_particles": 1726.1
+        },
+        "temporal_info": {
+          "hour": 12,
+          "day_of_week": 6,
+          "month": 8,
+          "is_weekend": true
+        }
+      },
+      {
+        "datetime": "2025-08-04T12:57:31",
+        "predicted_aqi": 48.4,
+        "category": "Good",
+        "parameters": {
+          "pm1": 6.88,
+          "pm25": 12.66,
+          "temperature": 33.9,
+          "humidity": 64.7,
+          "ultrafine_particles": 1246.6
+        },
+        "temporal_info": {
+          "hour": 12,
+          "day_of_week": 0,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-05T12:57:31",
+        "predicted_aqi": 38.8,
+        "category": "Good",
+        "parameters": {
+          "pm1": 5.33,
+          "pm25": 10.08,
+          "temperature": 32.7,
+          "humidity": 63.7,
+          "ultrafine_particles": 1393.3
+        },
+        "temporal_info": {
+          "hour": 12,
+          "day_of_week": 1,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-06T12:57:31",
+        "predicted_aqi": 55.1,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 5.53,
+          "pm25": 18.29,
+          "temperature": 30.9,
+          "humidity": 69.7,
+          "ultrafine_particles": 1556.3
+        },
+        "temporal_info": {
+          "hour": 12,
+          "day_of_week": 2,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-07T12:57:31",
+        "predicted_aqi": 50.8,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 6.88,
+          "pm25": 14.95,
+          "temperature": 31.6,
+          "humidity": 63.9,
+          "ultrafine_particles": 1808.4
+        },
+        "temporal_info": {
+          "hour": 12,
+          "day_of_week": 3,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-08T12:57:31",
+        "predicted_aqi": 54.0,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 9.29,
+          "pm25": 15.16,
+          "temperature": 33.1,
+          "humidity": 67.6,
+          "ultrafine_particles": 1433.2
+        },
+        "temporal_info": {
+          "hour": 12,
+          "day_of_week": 4,
+          "month": 8,
+          "is_weekend": false
+        }
+      },
+      {
+        "datetime": "2025-08-09T12:57:31",
+        "predicted_aqi": 51.7,
+        "category": "Moderate",
+        "parameters": {
+          "pm1": 9.92,
+          "pm25": 13.97,
+          "temperature": 31.8,
+          "humidity": 66.0,
+          "ultrafine_particles": 1617.1
+        },
+        "temporal_info": {
+          "hour": 12,
+          "day_of_week": 5,
+          "month": 8,
+          "is_weekend": true
+        }
+      }
+    ]
+  }
+}

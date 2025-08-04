@@ -1,0 +1,13 @@
+{
+  "aqi": 55.2,
+  "category": "Moderate",
+  "color": "#FFFF00",
+  "timestamp": "2025-08-03T23:57:31",
+  "parameters": {
+    "pm1": 5.99,
+    "pm25": 18.17,
+    "temperature": 21.7,
+    "humidity": 62.3,
+    "ultrafine_particles": 880.8
+  }
+}

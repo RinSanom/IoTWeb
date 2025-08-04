@@ -1,0 +1,9 @@
+Scenario,PM1,PM2.5,Temperature,Humidity,Hour,Predicted_AQI,Category,Description
+Excellent Air Quality,3.0,8.0,22.0,50.0,10,27.549440172093774,Good,Clean mountain air conditions
+Good Urban Air,8.0,15.0,25.0,60.0,14,50.5641279830603,Moderate,Typical good urban air quality
+Moderate Pollution,20.0,35.0,28.0,70.0,18,77.8656403477363,Moderate,Rush hour traffic pollution
+Unhealthy for Sensitive,35.0,65.0,32.0,80.0,20,97.30225414449518,Moderate,High pollution evening
+Unhealthy Air,50.0,95.0,35.0,85.0,22,103.06828380881372,Unhealthy for Sensitive Groups,Industrial pollution or fire smoke
+Very Unhealthy,80.0,150.0,38.0,90.0,23,106.82366409613886,Unhealthy for Sensitive Groups,Severe pollution event
+Cold Weather Low Pollution,5.0,12.0,5.0,40.0,8,43.376832215546244,Good,"Cold, clear winter morning"
+Hot Humid Moderate,25.0,40.0,40.0,95.0,15,82.57121959497988,Moderate,"Hot, humid tropical conditions"
