@@ -26,7 +26,7 @@ export async function GET(
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching health advice:", error);
-    
+
     // Get aqi again for fallback
     const { aqi } = await params;
     const aqiValue = parseInt(aqi || "85");

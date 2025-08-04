@@ -9,7 +9,7 @@ export class NotificationService {
   // VAPID keys - using environment variable for security
   private readonly VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || 'BB4iCbS53b7COBOQniz27IWOWj3juVPWFmbSz48LOAvKscI7lpy2dPFMJcdBTEzPegsQLP8L2ueFC_yBuHQPy94';
 
-  private constructor() {}
+  private constructor() {  } 
 
   public static getInstance(): NotificationService {
     if (!NotificationService.instance) {
