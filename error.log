@@ -1,0 +1,44 @@
+[2025-08-04 08:26:52 +0700] [25409] [INFO] Starting gunicorn 23.0.0
+[2025-08-04 08:26:52 +0700] [25409] [INFO] Listening at: http://0.0.0.0:5000 (25409)
+[2025-08-04 08:26:52 +0700] [25409] [INFO] Using worker: sync
+[2025-08-04 08:26:52 +0700] [25422] [INFO] Booting worker with pid: 25422
+[2025-08-04 08:26:53 +0700] [25423] [INFO] Booting worker with pid: 25423
+[2025-08-04 08:26:53 +0700] [25424] [INFO] Booting worker with pid: 25424
+[2025-08-04 08:26:53 +0700] [25425] [INFO] Booting worker with pid: 25425
+[2025-08-04 08:28:16 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:16 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:16 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:20 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:21 +0700] [25409] [INFO] Handling signal: winch
+[2025-08-04 08:28:49 +0700] [25425] [INFO] Worker exiting (pid: 25425)
+[2025-08-04 08:28:49 +0700] [25423] [INFO] Worker exiting (pid: 25423)
+[2025-08-04 08:28:49 +0700] [25424] [INFO] Worker exiting (pid: 25424)
+[2025-08-04 08:28:49 +0700] [25409] [INFO] Handling signal: term
+[2025-08-04 08:28:49 +0700] [25422] [INFO] Worker exiting (pid: 25422)
+[2025-08-04 08:28:49 +0700] [25409] [INFO] Shutting down: Master
+[2025-08-04 08:28:49 +0700] [28964] [INFO] Starting gunicorn 23.0.0
+[2025-08-04 08:28:49 +0700] [28964] [INFO] Listening at: http://0.0.0.0:5000 (28964)
+[2025-08-04 08:28:49 +0700] [28964] [INFO] Using worker: sync
+[2025-08-04 08:28:49 +0700] [29033] [INFO] Booting worker with pid: 29033
+[2025-08-04 08:28:49 +0700] [29040] [INFO] Booting worker with pid: 29040
+[2025-08-04 08:28:50 +0700] [29052] [INFO] Booting worker with pid: 29052
+[2025-08-04 08:28:50 +0700] [29081] [INFO] Booting worker with pid: 29081
+[2025-08-04 08:30:50 +0700] [28964] [INFO] Handling signal: int
+[2025-08-04 08:30:51 +0700] [29052] [INFO] Worker exiting (pid: 29052)
+[2025-08-04 08:30:51 +0700] [29040] [INFO] Worker exiting (pid: 29040)
+[2025-08-04 08:30:51 +0700] [29033] [INFO] Worker exiting (pid: 29033)
+[2025-08-04 08:30:51 +0700] [29081] [INFO] Worker exiting (pid: 29081)
+[2025-08-04 08:30:51 +0700] [28964] [ERROR] Worker (pid:29052) was sent SIGINT!
+[2025-08-04 08:30:51 +0700] [28964] [ERROR] Worker (pid:29081) was sent SIGINT!
+[2025-08-04 08:30:51 +0700] [28964] [ERROR] Worker (pid:29040) was sent SIGINT!
+[2025-08-04 08:30:51 +0700] [28964] [ERROR] Worker (pid:29033) was sent SIGINT!
+[2025-08-04 08:30:51 +0700] [28964] [INFO] Shutting down: Master
