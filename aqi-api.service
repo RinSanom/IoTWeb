@@ -1,0 +1,20 @@
+[Unit]
+Description=AQI Machine Learning API
+After=network.target
+
+[Service]
+Type=forking
+User=nomm
+Group=nomm
+WorkingDirectory=/home/nomm/Desktop/MachineLearning
+Environment=PATH=/home/nomm/Desktop/MachineLearning/venv/bin
+ExecStart=/home/nomm/Desktop/MachineLearning/venv/bin/gunicorn -c gunicorn.conf.py wsgi:app
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

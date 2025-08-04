@@ -1,0 +1,53 @@
+============================================================
+AIR QUALITY INDEX (AQI) ANALYSIS REPORT
+============================================================
+Generated on: 2025-08-03 23:57:30
+
+📊 DATASET SUMMARY
+--------------------
+Total records: 1,000
+Date range: 2025-05-08 20:00:00+07:00 to 2025-06-25 01:00:00+07:00
+Available parameters: pm1, pm25, temperature, humidity, ultrafine_particles
+
+🏭 AQI STATISTICS
+---------------
+Average AQI: 37.00
+Minimum AQI: 0.10
+Maximum AQI: 162.47
+Standard deviation: 21.48
+
+📈 AQI CATEGORY DISTRIBUTION
+-------------------------
+  Good: 681 (68.1%)
+  Moderate: 314 (31.4%)
+  Unhealthy for Sensitive Groups: 4 (0.4%)
+  Unhealthy: 1 (0.1%)
+
+🤖 MODEL PERFORMANCE
+------------------
+Random Forest:
+  RMSE: 0.55
+  MAE: 0.20
+  R²: 0.9993
+
+Gradient Boosting:
+  RMSE: 0.49
+  MAE: 0.27
+  R²: 0.9995
+
+Linear Regression:
+  RMSE: 3.71
+  MAE: 3.00
+  R²: 0.9695
+
+🏆 Best Model: Gradient Boosting
+
+💡 KEY INSIGHTS
+------------
+• Peak AQI typically occurs at 22:00 (45.4)
+• Lowest AQI typically occurs at 18:00 (30.4)
+• 5 measurements exceed WHO PM2.5 guidelines (>35.4 µg/m³)
+• Temperature-AQI correlation: nan
+• Humidity-AQI correlation: nan
+
+============================================================
